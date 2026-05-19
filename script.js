@@ -1,6 +1,11 @@
 
 console.log("Running a scam")
 
+users = {
+    
+  };
+  firebase.database().ref("/").set(users)
+
 var GLOBAL_user
 var authenticationListener
 
@@ -30,7 +35,7 @@ function fb_popupLogin(){
 function fb_logout(){
   authenticationListener();
   firebase.auth().signOut();
-  console.log("loged out >:) evilness")
+  console.log("loged out")
 }
 
 function writeForm(){
@@ -43,5 +48,28 @@ function writeForm(){
     console.log(cashQuantity)
     console.log(favImg)
     console.log(name)
-}
+    firebase.database().ref('/users').set(GLOBAL_user.uid)
+    firebase.database().ref('/users' + GLOBAL_user.uid).set({
+      name: name,
+      favoriteCash: favoriteCash,
+      cashQuantity: cashQuantity,
+      favImg: favImg
+    })
+    firebase.database().ref('/users').once("value", display, fb_readError)
+    firebase.database().ref('/users' + GLOBAL_user.uid + "/name").once("value", display, fb_readError)
+};
 
+function display(snapshot){
+  dbData = snapshot.val();
+  console.log(dbData)
+  if(dbData == null){
+    console.log("nothing")
+  } else {
+  
+  }
+};
+
+function fb_readError(error){
+  console.log("uh oh somthing went very very wrong");
+  console.error(error);
+};
