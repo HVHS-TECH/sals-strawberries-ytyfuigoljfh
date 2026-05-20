@@ -3,8 +3,11 @@ console.log("Running a scam")
 
 users = {
     
-  };
-  firebase.database().ref("/").set(users)
+};
+firebase.database().ref("/").set(users)
+
+const HTML_OUTPUT = document.getElementById("statusMessage")
+//const IMG_OUTPUT
 
 var GLOBAL_user
 var authenticationListener
@@ -56,7 +59,7 @@ function writeForm(){
       favImg: favImg
     })
     firebase.database().ref('/users').once("value", display, fb_readError)
-    firebase.database().ref('/users' + GLOBAL_user.uid + "/name").once("value", display, fb_readError)
+    firebase.database().ref('/users' + GLOBAL_user.uid).once("value", display, fb_readError)
 };
 
 function display(snapshot){
@@ -65,7 +68,8 @@ function display(snapshot){
   if(dbData == null){
     console.log("nothing")
   } else {
-  
+    HTML_OUTPUT.innerHTML = dbData["name"];
+  //  IMG_OUTPUT.src = dbData["img"];
   }
 };
 
