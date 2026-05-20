@@ -1,3 +1,4 @@
+// my code sucks
 
 console.log("Running a scam")
 
