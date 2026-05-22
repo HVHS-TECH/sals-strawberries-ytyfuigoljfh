@@ -14,6 +14,10 @@ body {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+.centerIMG {
+  margin: auto;
+}
+
 h1 {
   color: rgb(205, 255, 192);
   text-align: center;

@@ -8,7 +8,8 @@ users = {
 firebase.database().ref("/").set(users)
 
 const HTML_OUTPUT = document.getElementById("statusMessage")
-//const IMG_OUTPUT
+const IMG_OUTPUT = document.getElementById("userImg")
+const IMG2 = document.getElementById("userImgalt")
 
 var GLOBAL_user
 var authenticationListener
@@ -47,6 +48,7 @@ function writeForm(){
     const favoriteCash = document.getElementById("favoriteCash").value;
     const cashQuantity = document.getElementById("cashQuantity").value;
     const favImg = document.getElementById("favImg").value;
+    const favImgalt = document.getElementById("favImgalt").value;
     const name = document.getElementById("name").value;
     console.log(favoriteCash)
     console.log(cashQuantity)
@@ -57,10 +59,12 @@ function writeForm(){
       name: name,
       favoriteCash: favoriteCash,
       cashQuantity: cashQuantity,
-      favImg: favImg
+      favImg: favImg,
+      favImgalt: favImgalt
     })
     firebase.database().ref('/users').once("value", display, fb_readError)
     firebase.database().ref('/users' + GLOBAL_user.uid).once("value", display, fb_readError)
+    firebase.database().ref('/').once("value", displayDatabase, fb_readError)
 };
 
 function display(snapshot){
@@ -69,8 +73,18 @@ function display(snapshot){
   if(dbData == null){
     console.log("nothing")
   } else {
-    HTML_OUTPUT.innerHTML = dbData["name"];
-  //  IMG_OUTPUT.src = dbData["img"];
+    HTML_OUTPUT.innerHTML = "Hello " + dbData["name"] + " We have [A GRAND PIZE] of " + dbData["cashQuantity"] + " " + dbData["favoriteCash"] + " for you.";
+    IMG_OUTPUT.src = dbData["favImg"];
+    IMG2.src = dbData["favImgalt"]
+  }
+};
+
+function displayDatabase(snapshot){
+  dbData = snapshot.val();
+  if(dbData == null){
+    console.log("nothing")
+  } else {
+    console.log(dbData)
   }
 };
 

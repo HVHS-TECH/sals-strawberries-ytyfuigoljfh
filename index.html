@@ -36,12 +36,17 @@
       <input type="number" id="cashQuantity" name="cashQuantity" required />
 
       <label for="favImg">Favorite </label>
-      <input type="text" id="favImg" name="favImg" required />
+      <input type="file" id="favImg" name="favImg" required />
+
+      <label for="favImgalt">Favorite alt</label>
+      <input type="text" id="favImgalt" name="favImgalt" required />
     </form>
 
     <button onclick="writeForm()">[COMPLETE]</button>
 
     <p id="statusMessage"></p>
+    <img id="userImg"></img>
+    <img id="userImgalt" width="500px" class="centerIMG"></img>
   </div>
 
   <script src="script.js"></script>
